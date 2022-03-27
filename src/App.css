@@ -11,23 +11,7 @@
     margin: 0 auto;
 }
 
-.header {
-    grid-area: h;
-}
-
-.logotype-image {
-    width: 50px;
-}
-
-.nav {
-    grid-area: n;
-}
-
-.content {
+.app-wrapper_content {
     grid-area: c;
 }
 
-.content-header-image {
-    width: 100%;
-    height: 300px;
-}
