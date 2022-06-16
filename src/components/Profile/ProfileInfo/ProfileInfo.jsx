@@ -1,14 +1,18 @@
 import React from "react";
 import styles from "./ProfileInfo.module.css";
+import {Preloader} from "../../common/Preloader/Preloader";
+import ProfileStatusFunctional from "./ProfileStatus/ProfileStatusFunctional";
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
+	if (!props.profile) {
+		return <Preloader/>
+	}
+
 	return (
 		<div>
-			<img className={styles.contentHeaderImage}
-				 src="https://www.theautohost.com/_contentPages/vehicleContentPages/BMW/2022/X4/images/2022-BMW-X4-header.jpg"
-				 alt="BMW"/>
 			<div className={styles.descriptionBlog}>
-				ava+description
+				<img src={props.profile.photos.large} alt=""/>
+				<ProfileStatusFunctional status={props.status} updateUserStatus={props.updateUserStatus}/>
 			</div>
 		</div>
 	);

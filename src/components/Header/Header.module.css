@@ -6,3 +6,7 @@
 .logotypeImage {
     width: 50px;
 }
+
+.loginBlock {
+    float: right;
+}

@@ -2,11 +2,12 @@ import React from 'react';
 import styles from './Dialogs.module.css';
 import {DialogItem} from "./DialogItem/DialogItem";
 import {Message} from "./Message/Message";
+import AddMessageForm from "./AddMessageForm/AddMessageForm";
 
 const Dialogs = (props) => {
-	const dialogsElements = props.state.dialogs.map(dialog => <DialogItem key={dialog.userID} id={dialog.userID}
+	const dialogsElements = props.dialogs.map(dialog => <DialogItem key={dialog.userID} id={dialog.userID}
 																	userName={dialog.userName}/>);
-	const messagesElements = props.state.messages.map(message => <Message key={message.id} id={message.id}
+	const messagesElements = props.messages.map(message => <Message key={message.id} id={message.id}
 																	msg={message.msg}/>);
 
 	return (
@@ -15,7 +16,12 @@ const Dialogs = (props) => {
 				{dialogsElements}
 			</div>
 			<div className={styles.messages}>
-				{messagesElements}
+				<div>
+					{messagesElements}
+				</div>
+				<div>
+					<AddMessageForm onSubmit={value => props.sendMessage(value.newMessageBody)}/>
+				</div>
 			</div>
 		</div>
 	);
