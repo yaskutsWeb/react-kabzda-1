@@ -4,6 +4,7 @@ const ADD_POST = "yaProduction/profile/ADD-NEW-POST-TEXT";
 const SET_USER_PROFILE = 'yaProduction/profile/SET-USER-PROFILE';
 const SET_USER_STATUS = 'yaProduction/profile/SET-USER-STATUS';
 const DELETE_POST = 'yaProduction/profile/DELETE-POST';
+const SAVE_PHOTO = 'yaProduction/profile/SAVE-PHOTO';
 
 const initialState = {
 	posts: [
@@ -48,6 +49,12 @@ export const profileReducer = (state = initialState, action) => {
 				posts: state.posts.filter(post => post.id !== action.postID)
 			};
 		}
+		case SAVE_PHOTO: {
+			return {
+				...state,
+				profile: {...state.profile, photos: action.photos}
+			};
+		}
 		default: {
 			return state;
 		}
@@ -77,6 +84,7 @@ export const setUserStatus = (status) => {
 };
 
 export const deletePost = (postID) => ({type: DELETE_POST, postID});
+export const setUserPhoto = (photos) => ({type: SAVE_PHOTO, photos});
 
 export const getCurrentUserThunkCreator = (userID) => {
 	return async (dispatch) => {
@@ -100,3 +108,10 @@ export const updateUserStatus = (status) => {
 		}
 	};
 };
+
+export const uploadUserPhoto = (photoFile) => async (dispatch) => {
+	const response = await profileAPI.savePhoto(photoFile);
+	if (response.data.resultCode === 0) {
+		dispatch(setUserPhoto(response.data.data.photos));
+	}
+}
