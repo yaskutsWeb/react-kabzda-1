@@ -23,6 +23,7 @@ const ProfileStatusFunctional = (props) => {
 		<>
 			{!editMode &&
 				<div>
+					<h3>Status:</h3>
 					<p onClick={openEditMode}>
 						{status || 'add status'}
 					</p>

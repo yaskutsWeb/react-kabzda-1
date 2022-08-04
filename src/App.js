@@ -1,7 +1,7 @@
 import React, {Suspense} from 'react';
 import './App.css';
 import Navbar from "./components/Navbar/Navbar";
-import {Routes, Route} from "react-router-dom";
+import {Routes, Route, Navigate} from "react-router-dom";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
@@ -32,6 +32,7 @@ class App extends Component {
 					<Suspense
 						fallback={<Preloader/>}>
 						<Routes>
+							<Route path="*" element={<div>Page not found</div>}/>
 							<Route path="/profile/:userID"
 								   element={<ProfileContainer/>}/>
 							<Route path="/profile/"
@@ -42,6 +43,7 @@ class App extends Component {
 								   element={<UsersContainer/>}/>
 							<Route path="/login"
 								   element={<Login/>}/>
+							<Route exact path="/" element={<Navigate to="/profile"/>}/>
 						</Routes>
 					</Suspense>
 				</main>

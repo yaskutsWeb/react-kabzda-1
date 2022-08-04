@@ -8,7 +8,8 @@ const Profile = (props) => {
 		<div>
 			<ProfileInfo profile={props.profile} status={props.status} updateUserStatus={props.updateUserStatus}
 						 uploadUserPhoto={props.uploadUserPhoto}
-						 isOwner={props.isOwner}/>
+						 isOwner={props.isOwner}
+						 saveProfile={props.saveProfile}/>
 			<MyPostsContainer/>
 		</div>
 	);

@@ -9,7 +9,7 @@ const Checkbox = formComponentCreator('input', 'checkbox');
 const maxLength20 = maxLengthCreator(20);
 const minLength4 = minLengthCreator(4);
 
-const LoginForm = ({handleSubmit, error}) => {
+const LoginForm = ({handleSubmit, error, captchaURL}) => {
 	return (
 		<form onSubmit={handleSubmit}>
 			<div>
@@ -24,6 +24,10 @@ const LoginForm = ({handleSubmit, error}) => {
 				<Field id={"remember me"} type="checkbox" name={`rememberMe`} component={Checkbox}/>
 				<label htmlFor={"remember me"} name={`rememberMeLabel`}>Remember me</label>
 			</div>
+			{captchaURL && <img src={captchaURL}/>}
+			{captchaURL &&
+				<Field id={"captcha"} type="text" name={`captcha`} component={InputText}/>
+			}
 			{error && (
 				<div>
 					{error}

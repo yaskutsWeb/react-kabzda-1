@@ -1,7 +1,13 @@
 import React from "react";
 import Profile from "./Profile";
 import {connect} from "react-redux";
-import {getCurrentUserThunkCreator, getUserStatus, updateUserStatus, uploadUserPhoto} from "../../redux/profileReducer";
+import {
+	getCurrentUserThunkCreator,
+	getUserStatus,
+	saveProfile,
+	updateUserStatus,
+	uploadUserPhoto
+} from "../../redux/profileReducer";
 import {compose} from "redux";
 import WithURLParams from "../../hoc/WithURLParams";
 import {Navigate, useParams} from "react-router-dom";
@@ -36,7 +42,8 @@ class ProfileContainer extends React.Component {
 			return <Navigate to='/login'/>;
 		} else {
 			return (
-				<Profile {...this.props} isOwner={this.props.currentUserID === this.userID}/>
+				<Profile {...this.props} isOwner={this.props.currentUserID === this.userID}
+						 saveProfile={this.props.saveProfile}/>
 			);
 		}
 	}
@@ -56,7 +63,8 @@ export default compose(
 		getCurrentUser: getCurrentUserThunkCreator,
 		getUserStatus,
 		updateUserStatus,
-		uploadUserPhoto
+		uploadUserPhoto,
+		saveProfile
 	}),
 	withURLParams
 )(ProfileContainer);

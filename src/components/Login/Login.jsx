@@ -11,8 +11,8 @@ const Login = (props) => {
 				(<div>
 					<h1>Login</h1>
 					<LoginForm onSubmit={formData => {
-						props.login(formData.login, formData.password, formData.rememberMe);
-					}}/>
+						props.login(formData.login, formData.password, formData.rememberMe, formData.captcha);
+					}} captchaURL={props.captchaURL}/>
 				</div>)
 				: <Navigate to='/profile'/>}
 		</>
@@ -21,7 +21,8 @@ const Login = (props) => {
 
 const mapStateToProps = (state) => {
 	return {
-		isAuth: state.auth.isAuth
+		isAuth: state.auth.isAuth,
+		captchaURL: state.auth.captchaURL
 	}
 }
 

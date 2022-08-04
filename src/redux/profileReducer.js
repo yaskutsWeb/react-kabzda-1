@@ -1,4 +1,5 @@
 import {profileAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 const ADD_POST = "yaProduction/profile/ADD-NEW-POST-TEXT";
 const SET_USER_PROFILE = 'yaProduction/profile/SET-USER-PROFILE';
@@ -113,5 +114,15 @@ export const uploadUserPhoto = (photoFile) => async (dispatch) => {
 	const response = await profileAPI.savePhoto(photoFile);
 	if (response.data.resultCode === 0) {
 		dispatch(setUserPhoto(response.data.data.photos));
+	}
+}
+
+export const saveProfile = (profile) => async (dispatch, getState) => {
+	const userID = getState().auth.userID;
+	const response = await profileAPI.saveProfile(profile);
+	if (response.data.resultCode === 0) {
+		dispatch(getCurrentUserThunkCreator(userID));
+	} else {
+		dispatch(stopSubmit('editProfile', {_error: response.data.messages.length ? response.data.messages.join() : 'Values is not correct, pls try once again'}));
 	}
 }
